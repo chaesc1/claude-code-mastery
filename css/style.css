@@ -1,0 +1,318 @@
+/* ===================================
+   개발자 웹 이력서 - 커스텀 스타일
+   TailwindCSS로 처리하기 어려운 스타일 정의
+   =================================== */
+
+/* CSS 커스텀 속성 */
+:root {
+  --primary: #f97066;
+  --primary-dark: #ef4444;
+  --primary-light: #fca5a1;
+  --dark-bg: #0a0a1a;
+  --dark-card: #111827;
+  --dark-surface: #16163a;
+  --dark-border: #1f2937;
+}
+
+/* ===================================
+   스크롤 페이드인 애니메이션
+   =================================== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===================================
+   스킬 프로그레스 바
+   =================================== */
+.progress-bar-inner {
+  width: 0;
+  transition: width 1.2s ease-in-out;
+}
+
+/* ===================================
+   경력 타임라인
+   =================================== */
+.timeline {
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #e5e7eb;
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 0 2.5rem 2rem;
+}
+
+.timeline-item:nth-child(odd) {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+  left: 50%;
+  text-align: left;
+}
+
+/* 타임라인 도트 */
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 0.5rem;
+  width: 14px;
+  height: 14px;
+  background: var(--primary);
+  border: 3px solid white;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline-item:nth-child(odd)::before {
+  right: -7px;
+}
+
+.timeline-item:nth-child(even)::before {
+  left: -7px;
+}
+
+/* 타임라인 카드 내부 정렬 */
+.timeline-item:nth-child(odd) .timeline-card {
+  text-align: left;
+}
+
+/* 모바일 타임라인 */
+@media (max-width: 767px) {
+  .timeline::before {
+    left: 1rem;
+  }
+
+  .timeline-item {
+    width: 100%;
+    left: 0 !important;
+    text-align: left !important;
+    padding-left: 3rem;
+    padding-right: 1rem;
+  }
+
+  .timeline-item::before {
+    left: 0.5625rem !important;
+    right: auto !important;
+  }
+}
+
+/* ===================================
+   햄버거 메뉴 아이콘 애니메이션
+   =================================== */
+.hamburger-line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: currentColor;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger-active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ===================================
+   맨 위로 가기 버튼
+   =================================== */
+.back-to-top {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ===================================
+   네비게이션 활성 링크
+   =================================== */
+.nav-link {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link.active {
+  color: var(--primary);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 1px;
+}
+
+/* ===================================
+   SNS 링크 호버 효과
+   =================================== */
+.sns-link {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.sns-link:hover {
+  transform: translateY(-4px);
+}
+
+.sns-link-github:hover {
+  border-color: #333;
+  box-shadow: 0 4px 12px rgba(51, 51, 51, 0.3);
+}
+
+.sns-link-youtube:hover {
+  border-color: #FF0000;
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+}
+
+.sns-link-instagram:hover {
+  border-color: #E4405F;
+  box-shadow: 0 4px 12px rgba(228, 64, 95, 0.3);
+}
+
+.sns-link-linkedin:hover {
+  border-color: #0A66C2;
+  box-shadow: 0 4px 12px rgba(10, 102, 194, 0.3);
+}
+
+.sns-link-twitter:hover {
+  border-color: #000000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* SNS 아이콘 색상 변경 */
+.sns-link-github:hover .sns-icon { color: #333; }
+.sns-link-youtube:hover .sns-icon { color: #FF0000; }
+.sns-link-instagram:hover .sns-icon { color: #E4405F; }
+.sns-link-linkedin:hover .sns-icon { color: #0A66C2; }
+.sns-link-twitter:hover .sns-icon { color: #000000; }
+
+/* ===================================
+   다크모드 오버라이드
+   =================================== */
+.dark .timeline::before {
+  background: #1f2937;
+}
+
+.dark .timeline-item::before {
+  border-color: #0a0a1a;
+}
+
+.dark .nav-link.active {
+  color: var(--primary-light);
+}
+
+.dark .nav-link.active::after {
+  background: var(--primary-light);
+}
+
+/* 다크모드 SNS 호버 */
+.dark .sns-link-github:hover .sns-icon { color: #f0f0f0; }
+.dark .sns-link-twitter:hover .sns-icon { color: #ffffff; }
+.dark .sns-link-github:hover {
+  border-color: #f0f0f0;
+  box-shadow: 0 4px 12px rgba(240, 240, 240, 0.2);
+}
+.dark .sns-link-twitter:hover {
+  border-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+/* ===================================
+   프로필 이미지 플레이스홀더
+   =================================== */
+.profile-placeholder {
+  background: linear-gradient(135deg, #f97066, #ef4444);
+}
+
+/* ===================================
+   모바일 메뉴 트랜지션
+   =================================== */
+.mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.mobile-menu.open {
+  max-height: 400px;
+}
+
+/* ===================================
+   기술 스택 티커 애니메이션
+   =================================== */
+.tech-ticker {
+  position: relative;
+}
+
+.ticker-track {
+  animation: ticker-scroll 25s linear infinite;
+  width: max-content;
+}
+
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* 접근성: 모션 감소 설정 시 애니메이션 비활성화 */
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+  .hero-circle {
+    animation: none;
+  }
+}
+
+/* ===================================
+   히어로 장식 원 애니메이션
+   =================================== */
+@keyframes hero-circle-pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+.hero-circle {
+  animation: hero-circle-pulse 4s ease-in-out infinite;
+}
